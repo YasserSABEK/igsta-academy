@@ -1,200 +1,240 @@
-import Image from "next/image";
+"use client";
 
-const tracks = [
+import Image from "next/image";
+import { motion } from "motion/react";
+import {
+  ArrowRight,
+  BrainCircuit,
+  BriefcaseBusiness,
+  Check,
+  ChevronDown,
+  Globe2,
+  HeartPulse,
+  Languages,
+  Menu,
+  MessageCircle,
+  Mic2,
+  Sparkles,
+  Users,
+} from "lucide-react";
+
+const programs = [
   {
-    title: "English for Employability",
-    desc: "Job-ready communication, interviews, CV writing, and professional English that employers want.",
+    title: "English & Communication",
+    description: "Speak with clarity, write professionally, and feel ready for interviews, presentations, and international opportunities.",
+    modules: ["Professional English", "Public speaking", "Interview practice"],
+    icon: Languages,
+    color: "blue",
   },
   {
-    title: "AI Tools for Students",
-    desc: "Practical AI, productivity platforms, digital marketing, and technical fluency for the modern workplace.",
+    title: "Digital & AI Skills",
+    description: "Use modern tools to research, create, collaborate, and solve real problems—not just watch tutorials.",
+    modules: ["Practical AI tools", "Digital productivity", "Content & marketing"],
+    icon: BrainCircuit,
+    color: "violet",
   },
   {
-    title: "Public Speaking & Career",
-    desc: "Confidence, presentations, leadership, teamwork, and professional readiness for your first role.",
+    title: "Career & Leadership",
+    description: "Turn academic potential into workplace confidence through practical projects, teamwork, and career preparation.",
+    modules: ["CV & career readiness", "Leadership", "Project teamwork"],
+    icon: BriefcaseBusiness,
+    color: "orange",
+  },
+  {
+    title: "Health & Life Skills",
+    description: "Build the personal habits, awareness, and resilience that help ambitious students perform sustainably.",
+    modules: ["Healthy habits", "Stress awareness", "First-aid basics"],
+    icon: HeartPulse,
+    color: "teal",
   },
 ];
 
 const steps = [
-  { n: "01", title: "Join a cohort", desc: "Register for a 4-week structured track at your campus." },
-  { n: "02", title: "Learn by doing", desc: "Attend blended workshops with experienced trainers." },
-  { n: "03", title: "Get certified", desc: "Complete your track and earn a partner-backed certificate." },
+  { n: "01", title: "Choose your pathway", text: "Start with the skill gap that matters most to your study, work, or personal growth." },
+  { n: "02", title: "Learn through practice", text: "Join guided workshops, real exercises, and peer learning—online and in person." },
+  { n: "03", title: "Build proof", text: "Complete practical work that demonstrates what you can do, not only what you attended." },
+  { n: "04", title: "Move forward", text: "Use your new confidence and skills for university, employment, entrepreneurship, and life." },
 ];
+
+const faqs = [
+  ["Who is IGSTA for?", "IGSTA is designed for university students, recent graduates, and ambitious young people in Algeria who want practical skills for education, work, and life."],
+  ["Are programs online or in person?", "The academy is designed for blended learning: focused in-person workshops supported by useful online resources and community follow-up."],
+  ["Do I need previous experience?", "No. Each pathway is structured to start from your current level and move toward practical, visible progress."],
+  ["When does the next cohort begin?", "Cohort dates and registration details will be announced to the priority list first. Join below to receive the launch information."],
+];
+
+const reveal = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.2 },
+  transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const },
+};
+
+function BrandMark({ light = false }: { light?: boolean }) {
+  return (
+    <span className="brand-mark" aria-label="IGSTA Academy">
+      <span className={`brand-orbit ${light ? "brand-orbit-light" : ""}`}><Sparkles size={17} strokeWidth={2.3} /></span>
+      <span className={light ? "text-white" : "text-navy"}>IGSTA</span>
+    </span>
+  );
+}
+
+function SectionIntro({ eyebrow, title, text, centered = false }: { eyebrow: string; title: string; text: string; centered?: boolean }) {
+  return (
+    <motion.div {...reveal} className={centered ? "section-intro section-intro-centered" : "section-intro"}>
+      <p className="eyebrow">{eyebrow}</p>
+      <h2>{title}</h2>
+      <p className="section-copy">{text}</p>
+    </motion.div>
+  );
+}
 
 export default function IGSTALanding() {
   return (
-    <div className="min-h-screen">
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 border-b border-[var(--color-border)] bg-[var(--color-background)]/90 backdrop-blur-md">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-          <span className="text-xl font-bold tracking-tight" style={{ fontFamily: "'EB Garamond', serif" }}>
-            IGSTA
-          </span>
-          <a
-            href="#join"
-            className="cursor-pointer rounded-lg bg-[var(--color-primary)] px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-[#0F766E] focus:ring-2 focus:ring-[var(--color-primary)] focus:ring-offset-2"
-          >
-            Join waitlist
-          </a>
+    <div className="site-shell">
+      <a className="skip-link" href="#main-content">Skip to content</a>
+
+      <header className="site-header">
+        <div className="container header-inner">
+          <a href="#top" className="logo-link" aria-label="IGSTA home"><BrandMark /></a>
+          <nav className="desktop-nav" aria-label="Primary navigation">
+            <a href="#programs">Programs</a>
+            <a href="#method">How it works</a>
+            <a href="#about">About</a>
+            <a href="#faq">FAQ</a>
+          </nav>
+          <a className="button button-primary button-small header-cta" href="#join">Join the next cohort <ArrowRight size={16} /></a>
+          <a className="mobile-menu" href="#programs" aria-label="Open program navigation"><Menu size={22} /></a>
         </div>
       </header>
 
-      {/* Hero */}
-      <section className="px-6 pt-32 pb-20 sm:pt-40 sm:pb-24">
-        <div className="mx-auto max-w-5xl">
-          <div className="max-w-2xl">
-            <p className="mb-6 text-sm font-medium uppercase tracking-widest text-[var(--color-primary)]">
-              Campus-first skills academy · Algeria
-            </p>
-            <h1 className="text-4xl font-bold leading-[1.15] tracking-tight sm:text-5xl lg:text-[3.5rem]">
-              From student to job-ready in one semester.
-            </h1>
-            <p className="mt-6 max-w-lg text-lg leading-relaxed text-[var(--color-muted)]" style={{ fontFamily: "'Crimson Text', serif" }}>
-              IGSTA is a university-based academy that gives Algerian students the languages, digital skills, and professional confidence employers actually want.
-            </p>
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <a
-                href="#join"
-                className="cursor-pointer rounded-lg bg-[var(--color-accent)] px-7 py-3.5 text-center text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#B45309] focus:ring-2 focus:ring-[var(--color-accent)] focus:ring-offset-2"
-              >
-                Join the next cohort
-              </a>
-              <a
-                href="#tracks"
-                className="cursor-pointer rounded-lg border border-[var(--color-border)] bg-white px-7 py-3.5 text-center text-sm font-semibold text-[var(--color-foreground)] transition-all duration-200 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]"
-              >
-                View learning tracks
-              </a>
+      <main id="main-content">
+        <section id="top" className="hero-wrap" aria-labelledby="hero-title">
+          <div className="hero-media" aria-hidden="true">
+            <Image src="/igsta/hero-brand.jpg" alt="" fill priority sizes="100vw" className="hero-image" />
+          </div>
+          <div className="hero-shade" />
+          <div className="hero-ribbon hero-ribbon-one" />
+          <div className="hero-ribbon hero-ribbon-two" />
+          <div className="container hero-content">
+            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }} className="hero-copy">
+              <div className="hero-kicker"><span className="live-dot" /> Algeria&apos;s practical skills academy</div>
+              <h1 id="hero-title">Skills that move<br />you <span>forward.</span></h1>
+              <p>IGSTA helps Algerian students and young professionals build the communication, digital, career, and life skills the real world demands.</p>
+              <div className="hero-actions">
+                <motion.a whileHover={{ scale: 1.025 }} whileTap={{ scale: 0.98 }} className="button button-accent" href="#join">Join the next cohort <ArrowRight size={18} /></motion.a>
+                <a className="button button-ghost" href="#programs">Explore programs</a>
+              </div>
+              <div className="hero-proof" aria-label="Program benefits">
+                <span><Check size={15} /> Practice-first learning</span>
+                <span><Check size={15} /> Blended experience</span>
+                <span><Check size={15} /> Built for Algeria</span>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        <section className="promise-strip" aria-label="IGSTA promise">
+          <div className="container promise-grid">
+            <div><Globe2 /><span><strong>Local context</strong>Global ambition</span></div>
+            <div><Users /><span><strong>Human learning</strong>Real trainers & peers</span></div>
+            <div><Mic2 /><span><strong>Active practice</strong>Skills you can demonstrate</span></div>
+            <div><BriefcaseBusiness /><span><strong>Career relevance</strong>Made for the next step</span></div>
+          </div>
+        </section>
+
+        <section id="programs" className="section programs-section">
+          <div className="container">
+            <SectionIntro centered eyebrow="Learning pathways" title="One academy. Skills for the whole person." text="Clear pathways help you focus on what matters now while building a foundation that keeps paying off later." />
+            <div className="program-grid">
+              {programs.map((program, index) => {
+                const Icon = program.icon;
+                return (
+                  <motion.article {...reveal} transition={{ ...reveal.transition, delay: index * 0.06 }} className={`program-card card-${program.color}`} key={program.title}>
+                    <div className="program-number">0{index + 1}</div>
+                    <div className="program-icon"><Icon size={25} /></div>
+                    <h3>{program.title}</h3>
+                    <p>{program.description}</p>
+                    <ul>{program.modules.map((module) => <li key={module}><Check size={15} />{module}</li>)}</ul>
+                    <a href="#join">Get cohort updates <ArrowRight size={16} /></a>
+                  </motion.article>
+                );
+              })}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Trust bar */}
-      <section className="border-y border-[var(--color-border)] bg-white px-6 py-5">
-        <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-x-10 gap-y-2 text-sm text-[var(--color-muted)]">
-          <span>University-supervised</span>
-          <span>Blended offline + online</span>
-          <span>Partner-backed certificates</span>
-          <span>Student-friendly pricing</span>
-        </div>
-      </section>
-
-      {/* Tracks */}
-      <section id="tracks" className="px-6 py-20 sm:py-28">
-        <div className="mx-auto max-w-5xl">
-          <p className="text-sm font-medium uppercase tracking-widest text-[var(--color-primary)]">Learning tracks</p>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
-            Three focused programs to start.
-          </h2>
-          <p className="mt-4 max-w-lg text-[var(--color-muted)]" style={{ fontFamily: "'Crimson Text', serif", fontSize: '1.1rem' }}>
-            Each track is a 4-week blended program — real trainers, real practice, a certificate at the end. No fluff.
-          </p>
-
-          <div className="mt-14 grid gap-8 sm:grid-cols-3">
-            {tracks.map((track) => (
-              <div
-                key={track.title}
-                className="rounded-xl border border-[var(--color-border)] bg-white p-7 transition-all duration-200 hover:border-[var(--color-secondary)] hover:shadow-md"
-              >
-                <h3 className="text-lg font-semibold text-[var(--color-foreground)]">{track.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-[var(--color-muted)]">{track.desc}</p>
+        <section id="method" className="section method-section">
+          <div className="container method-layout">
+            <div className="method-visual">
+              <Image src="/igsta/brand-reference-wide.jpg" alt="IGSTA blue brand identity artwork" fill sizes="(max-width: 900px) 100vw, 45vw" className="method-image" />
+              <div className="method-quote"><Sparkles size={19} /><strong>Knowledge becomes power when you can use it.</strong></div>
+            </div>
+            <div className="method-content">
+              <SectionIntro eyebrow="The IGSTA method" title="How IGSTA works" text="A simple journey designed around progress—not passive attendance." />
+              <div className="steps-list">
+                {steps.map((step) => (
+                  <motion.div {...reveal} className="step" key={step.n}>
+                    <span>{step.n}</span><div><h3>{step.title}</h3><p>{step.text}</p></div>
+                  </motion.div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* How it works */}
-      <section className="border-y border-[var(--color-border)] bg-white px-6 py-20 sm:py-28">
-        <div className="mx-auto max-w-5xl">
-          <p className="text-sm font-medium uppercase tracking-widest text-[var(--color-primary)]">How it works</p>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
-            Simple path. Real results.
-          </h2>
-
-          <div className="mt-14 grid gap-10 sm:grid-cols-3">
-            {steps.map((step) => (
-              <div key={step.n}>
-                <span className="text-3xl font-bold text-[var(--color-secondary)]" style={{ fontFamily: "'EB Garamond', serif" }}>
-                  {step.n}
-                </span>
-                <h3 className="mt-3 text-base font-semibold">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">{step.desc}</p>
-              </div>
-            ))}
+        <section id="about" className="section impact-section">
+          <div className="container impact-grid">
+            <motion.div {...reveal} className="impact-copy">
+              <p className="eyebrow eyebrow-light">Our point of view</p>
+              <h2>Built for Algeria.<br /><span>Ready for the world.</span></h2>
+              <p>Talent is everywhere. Access to practical, relevant training is not. IGSTA exists to close that gap with learning that respects where students are—and expands where they can go.</p>
+              <a href="#join" className="button button-light">Be first to hear about launch <ArrowRight size={17} /></a>
+            </motion.div>
+            <div className="impact-pillars">
+              <div><span>01</span><h3>Practical over theoretical</h3><p>Every program is built around doing, feedback, and visible progress.</p></div>
+              <div><span>02</span><h3>Accessible by design</h3><p>Clear pathways and blended delivery reduce barriers to participation.</p></div>
+              <div><span>03</span><h3>Ambition without borders</h3><p>Local relevance meets communication and digital skills for a global future.</p></div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Who it's for */}
-      <section className="px-6 py-20 sm:py-28">
-        <div className="mx-auto grid max-w-5xl gap-12 lg:grid-cols-2 lg:items-center">
-          <div>
-            <p className="text-sm font-medium uppercase tracking-widest text-[var(--color-primary)]">Who this is for</p>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
-              Built for ambitious Algerian students.
-            </h2>
-            <ul className="mt-8 space-y-5 text-[var(--color-foreground)]">
-              <li className="flex items-start gap-3">
-                <span className="mt-2 block h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-primary)]" />
-                <span>Students who want to graduate with real skills, not just a diploma</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="mt-2 block h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-primary)]" />
-                <span>Recent graduates preparing for their first job or interview</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="mt-2 block h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-primary)]" />
-                <span>Anyone who needs better English, digital fluency, or public speaking confidence</span>
-              </li>
-            </ul>
+        <section id="faq" className="section faq-section">
+          <div className="container faq-layout">
+            <SectionIntro eyebrow="Good to know" title="Frequently asked questions" text="The essentials before you join the priority list." />
+            <div className="faq-list">
+              {faqs.map(([question, answer], index) => (
+                <details key={question} open={index === 0}>
+                  <summary>{question}<ChevronDown size={20} /></summary>
+                  <p>{answer}</p>
+                </details>
+              ))}
+            </div>
           </div>
-          <div className="relative">
-            <Image
-              src="/igsta/hero-students.jpg"
-              alt="IGSTA students in a training session"
-              width={800}
-              height={500}
-              className="rounded-xl border border-[var(--color-border)] shadow-lg"
-            />
-          </div>
-        </div>
-      </section>
+        </section>
 
-      {/* CTA */}
-      <section id="join" className="border-t border-[var(--color-border)] bg-white px-6 py-20 sm:py-28">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            Ready to start?
-          </h2>
-          <p className="mt-4 text-[var(--color-muted)]" style={{ fontFamily: "'Crimson Text', serif", fontSize: '1.1rem' }}>
-            The next cohort starts soon. Join the waitlist and be the first to know.
-          </p>
-          <div className="mt-10">
-            <a
-              href="https://wa.me/213696699378?text=Hi%20IGSTA%2C%20I%20want%20to%20join%20the%20next%20cohort"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="cursor-pointer inline-block rounded-lg bg-[var(--color-accent)] px-8 py-4 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#B45309] focus:ring-2 focus:ring-[var(--color-accent)] focus:ring-offset-2"
-            >
-              Message us on WhatsApp
-            </a>
+        <section id="join" className="join-section">
+          <div className="container join-card">
+            <div className="join-orbit" aria-hidden="true" />
+            <motion.div {...reveal} className="join-copy">
+              <p className="eyebrow eyebrow-light">Priority list now open</p>
+              <h2>Join the next cohort</h2>
+              <p>Get program dates, locations, pricing, and registration details as soon as enrollment opens.</p>
+            </motion.div>
+            <div className="join-actions">
+              <a className="button button-accent" href="mailto:hello@igsta.academy?subject=IGSTA%20cohort%20priority%20list">Join by email <ArrowRight size={18} /></a>
+              <p><MessageCircle size={15} /> No payment required. Just launch updates.</p>
+            </div>
           </div>
-          <p className="mt-4 text-xs text-[var(--color-muted)]">Free to join. No commitment until you register for a track.</p>
-        </div>
-      </section>
+        </section>
+      </main>
 
-      {/* Footer */}
-      <footer className="border-t border-[var(--color-border)] px-6 py-8">
-        <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-3 sm:flex-row">
-          <span className="text-sm font-semibold" style={{ fontFamily: "'EB Garamond', serif" }}>
-            IGSTA Academy
-          </span>
-          <p className="text-xs text-[var(--color-muted)]">
-            International Global Skills Training Academy · Algeria
-          </p>
+      <footer className="site-footer">
+        <div className="container footer-top">
+          <div><BrandMark light /><p>International Global Skills Training Academy<br />Algeria</p></div>
+          <div className="footer-links"><a href="#programs">Programs</a><a href="#method">Method</a><a href="#about">About</a><a href="#faq">FAQ</a></div>
         </div>
+        <div className="container footer-bottom"><span>© 2026 IGSTA Academy</span><span>Learn. Practice. Move forward.</span></div>
       </footer>
     </div>
   );
