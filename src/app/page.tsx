@@ -72,9 +72,15 @@ const reveal = {
 
 function BrandMark({ light = false }: { light?: boolean }) {
   return (
-    <span className="brand-mark" aria-label="IGSTA Academy">
-      <span className={`brand-orbit ${light ? "brand-orbit-light" : ""}`}><Sparkles size={17} strokeWidth={2.3} /></span>
-      <span className={light ? "text-white" : "text-navy"}>IGSTA</span>
+    <span className={`brand-mark ${light ? "brand-mark-light" : ""}`} aria-label="IGSTA Academy">
+      <Image
+        src="/android-chrome-192x192.png"
+        alt=""
+        width={44}
+        height={44}
+        className="brand-logo"
+      />
+      <span className="brand-wordmark">IGSTA</span>
     </span>
   );
 }

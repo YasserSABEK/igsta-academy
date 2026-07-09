@@ -34,11 +34,10 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .site-header { position: fixed; inset: 0 0 auto; z-index: 80; height: 76px; border-bottom: 1px solid rgb(255 255 255 / 12%); background: rgb(4 18 67 / 84%); backdrop-filter: blur(20px) saturate(140%); color: white; }
 .header-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
 .logo-link { display: inline-flex; min-height: 44px; align-items: center; }
-.brand-mark { display: inline-flex; align-items: center; gap: 10px; font: 700 24px/1 "Outfit", sans-serif; letter-spacing: -.03em; }
-.brand-orbit { position: relative; display: grid; width: 37px; height: 37px; place-items: center; border: 2px solid var(--blue); border-radius: 50%; color: var(--orange); }
-.brand-orbit::after { content: ""; position: absolute; width: 8px; height: 8px; top: -4px; right: 1px; border-radius: 50%; background: var(--orange); box-shadow: -28px 25px 0 #6ba6ff; }
-.brand-orbit-light { border-color: #72a4ff; }
-.text-white { color: white; }.text-navy { color: var(--navy); }
+.brand-mark { display: inline-flex; align-items: center; gap: 10px; color: white; font: 700 24px/1 "Outfit", sans-serif; letter-spacing: -.03em; }
+.brand-logo { width: 44px; height: 44px; flex: 0 0 44px; border-radius: 10px; object-fit: contain; }
+.brand-wordmark { color: inherit; }
+.brand-mark-light { color: white; }
 .desktop-nav { display: flex; align-items: center; gap: 32px; margin-left: auto; }
 .desktop-nav a { min-height: 44px; display: flex; align-items: center; color: #dce7ff; font-size: 14px; font-weight: 600; transition: color .2s ease; }
 .desktop-nav a:hover { color: white; }
