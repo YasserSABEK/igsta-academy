@@ -206,7 +206,7 @@ export default function IGSTALanding() {
         <section id="method" className="section method-section">
           <div className="container method-layout">
             <div className="method-visual">
-              <Image src="/igsta/brand-reference-wide.jpg" alt="IGSTA blue brand identity artwork" fill sizes="(max-width: 900px) 100vw, 45vw" className="method-image" />
+              <Image src="/igsta/how-igsta-works.jpg" alt="IGSTA students learning practical skills together" fill sizes="(max-width: 900px) 100vw, 45vw" className="method-image" />
               <div className="method-quote"><Sparkles size={19} /><strong>Knowledge becomes power when you can use it.</strong></div>
             </div>
             <div className="method-content">

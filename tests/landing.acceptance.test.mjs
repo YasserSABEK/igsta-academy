@@ -24,9 +24,9 @@ test("landing page contains the complete IGSTA information architecture", () => 
   }
 });
 
-test("landing page uses the generated brand asset and supplied brand references", () => {
+test("landing page uses the generated hero and supplied method image", () => {
   assert.match(page, /hero-brand\.jpg/);
-  assert.match(page, /brand-reference-wide\.jpg/);
+  assert.match(page, /how-igsta-works\.jpg/);
 });
 
 test("landing page has accessible navigation, semantic main content, and reduced-motion support", () => {
