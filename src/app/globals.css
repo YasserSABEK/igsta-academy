@@ -129,8 +129,21 @@ details p { max-width: 680px; margin: -5px 42px 24px 0; color: var(--body); line
 .join-section { padding: 40px 0 110px; background: #f8faff; }
 .join-card { position: relative; min-height: 360px; display: grid; grid-template-columns: 1.2fr .8fr; gap: 50px; align-items: center; padding: 68px; border-radius: 38px; overflow: hidden; color: white; background: linear-gradient(130deg, #06174b, #012ac6); box-shadow: 0 35px 90px rgb(1 31 130 / 20%); }
 .join-orbit { position: absolute; width: 500px; height: 210px; right: -250px; top: -40px; border: 1px solid rgb(150 183 255 / 35%); border-radius: 50%; transform: rotate(-25deg); }
-.join-copy, .join-actions { position: relative; }.join-copy p:not(.eyebrow) { max-width: 650px; margin: 20px 0 0; color: #d7e3ff; font-size: 16px; line-height: 1.7; }
-.join-actions { justify-self: end; text-align: center; }.join-actions > p { display: flex; justify-content: center; align-items: center; gap: 7px; margin: 13px 0 0; color: #c9d8fa; font-size: 11px; }
+.join-copy, .signup-form { position: relative; }.join-copy p:not(.eyebrow) { max-width: 650px; margin: 20px 0 0; color: #d7e3ff; font-size: 16px; line-height: 1.7; }
+.signup-form { width: min(100%, 520px); justify-self: end; }
+.signup-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.signup-field { display: grid; gap: 7px; text-align: left; }
+.signup-field label { color: #eef3ff; font-size: 12px; font-weight: 700; }
+.signup-field input { width: 100%; min-height: 52px; border: 1px solid rgb(255 255 255 / 24%); border-radius: 14px; padding: 0 15px; outline: none; color: white; background: rgb(255 255 255 / 10%); font: 500 16px/1 "Inter", sans-serif; transition: border-color .2s ease, background .2s ease, box-shadow .2s ease; }
+.signup-field input::placeholder { color: #aebee2; }
+.signup-field input:focus { border-color: #ffb273; background: rgb(255 255 255 / 15%); box-shadow: 0 0 0 3px rgb(255 122 26 / 18%); }
+.signup-submit { width: 100%; margin-top: 14px; border: 0; }
+.signup-submit:disabled { cursor: wait; opacity: .68; transform: none; }
+.signup-privacy { display: flex; justify-content: center; align-items: flex-start; gap: 7px; margin: 13px 0 0; color: #c9d8fa; font-size: 11px; line-height: 1.45; }
+.signup-privacy svg { flex: 0 0 auto; margin-top: 1px; }
+.signup-message { min-height: 22px; margin: 10px 0 0; text-align: center; font-size: 13px; font-weight: 600; line-height: 1.5; }
+.signup-message.success { color: #bdf8d8; }.signup-message.error { color: #ffd1cf; }
+.signup-honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
 .site-footer { padding: 64px 0 25px; color: #c5d4f6; background: #030d2e; }
 .footer-top { display: flex; justify-content: space-between; gap: 40px; padding-bottom: 52px; }.footer-top p { margin: 18px 0 0; color: #8597c0; font-size: 13px; line-height: 1.7; }
@@ -142,7 +155,7 @@ details p { max-width: 680px; margin: -5px 42px 24px 0; color: var(--body); line
   .hero-wrap { min-height: 720px; }.hero-shade { background: linear-gradient(90deg, rgb(1 11 54 / 95%) 0%, rgb(1 17 79 / 79%) 65%, rgb(1 16 70 / 48%) 100%); }
   .promise-grid { grid-template-columns: repeat(2, 1fr); }.promise-grid > div:nth-child(3) { border-left: 1px solid var(--line); }
   .method-layout, .impact-grid, .faq-layout { grid-template-columns: 1fr; }.method-layout, .faq-layout { gap: 55px; }.method-visual { min-height: 480px; }.impact-grid { gap: 45px; }
-  .join-card { grid-template-columns: 1fr; }.join-actions { justify-self: start; text-align: left; }.join-actions > p { justify-content: flex-start; }
+  .join-card { grid-template-columns: 1fr; }.signup-form { justify-self: start; }
 }
 
 @media (max-width: 640px) {
@@ -153,7 +166,7 @@ details p { max-width: 680px; margin: -5px 42px 24px 0; color: var(--body); line
   .section { padding: 82px 0; }.section-copy { font-size: 16px; }.program-grid { grid-template-columns: 1fr; margin-top: 42px; }.program-card { min-height: 0; padding: 28px 24px; }.program-number { font-size: 56px; }
   .method-visual { min-height: 390px; border-radius: 26px; }.method-quote { left: 16px; right: 16px; bottom: 16px; font-size: 13px; }.method-layout { gap: 46px; }
   .step { grid-template-columns: 42px 1fr; }.faq-layout { gap: 36px; }
-  .join-section { padding-bottom: 70px; }.join-card { min-height: 0; padding: 42px 26px; border-radius: 28px; }.join-actions, .join-actions .button { width: 100%; }
+  .join-section { padding-bottom: 70px; }.join-card { min-height: 0; padding: 42px 26px; border-radius: 28px; }.signup-form, .signup-submit { width: 100%; }.signup-fields { grid-template-columns: 1fr; }.signup-privacy { justify-content: flex-start; }.signup-message { text-align: left; }
   .footer-top, .footer-bottom { flex-direction: column; }.footer-links { gap: 12px 22px; }
 }
 

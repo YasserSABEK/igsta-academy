@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { FormEvent, useState } from "react";
 import { motion } from "motion/react";
 import {
   ArrowRight,
@@ -96,6 +97,38 @@ function SectionIntro({ eyebrow, title, text, centered = false }: { eyebrow: str
 }
 
 export default function IGSTALanding() {
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [formMessage, setFormMessage] = useState("");
+
+  async function handleSignup(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    setStatus("submitting");
+    setFormMessage("");
+
+    try {
+      const response = await fetch("/api/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(Object.fromEntries(formData)),
+      });
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "We could not complete your signup.");
+      }
+
+      form.reset();
+      setStatus("success");
+      setFormMessage("You’re on the priority list. We’ll send launch details as soon as enrollment opens.");
+    } catch (error) {
+      setStatus("error");
+      setFormMessage(error instanceof Error ? error.message : "We could not complete your signup. Please try again.");
+    }
+  }
+
   return (
     <div className="site-shell">
       <a className="skip-link" href="#main-content">Skip to content</a>
@@ -227,10 +260,30 @@ export default function IGSTALanding() {
               <h2>Join the next cohort</h2>
               <p>Get program dates, locations, pricing, and registration details as soon as enrollment opens.</p>
             </motion.div>
-            <div className="join-actions">
-              <a className="button button-accent" href="mailto:hello@igsta.academy?subject=IGSTA%20cohort%20priority%20list">Join by email <ArrowRight size={18} /></a>
-              <p><MessageCircle size={15} /> No payment required. Just launch updates.</p>
-            </div>
+            <form className="signup-form" action="/api/signup" method="post" onSubmit={handleSignup}>
+              <div className="signup-fields">
+                <div className="signup-field">
+                  <label htmlFor="signup-name">Your name</label>
+                  <input id="signup-name" name="name" type="text" autoComplete="name" maxLength={100} required placeholder="Full name" />
+                </div>
+                <div className="signup-field">
+                  <label htmlFor="signup-email">Email address</label>
+                  <input id="signup-email" name="email" type="email" autoComplete="email" maxLength={254} required placeholder="you@example.com" />
+                </div>
+                <div className="signup-honeypot" aria-hidden="true">
+                  <label htmlFor="signup-website">Website</label>
+                  <input id="signup-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+                </div>
+              </div>
+              <button className="button button-accent signup-submit" type="submit" disabled={status === "submitting"}>
+                {status === "submitting" ? "Joining…" : "Join the priority list"}
+                {status !== "submitting" && <ArrowRight size={18} />}
+              </button>
+              <p className="signup-privacy"><MessageCircle size={15} /> No payment required. We’ll only use your details for IGSTA launch updates.</p>
+              <p className={`signup-message ${status}`} aria-live="polite">
+                {formMessage}
+              </p>
+            </form>
           </div>
         </section>
       </main>

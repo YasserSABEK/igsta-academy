@@ -3,3 +3,6 @@ dist/
 .next/
 *.log
 .kiro/
+.env
+.env.*
+!.env.example
